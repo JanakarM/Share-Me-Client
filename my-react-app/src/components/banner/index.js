@@ -1,18 +1,16 @@
-import React, { Component } from "react";
+import {login} from '../../state-management/reducers/logon-reducer'
 import "./styles.css";
+import {useDispatch} from 'react-redux';
 
-class Banner extends Component {
-  render() {
-    const { className, children, style } = this.props;
-    console.log(style);
-    return (
-      <>
-        <div className={`container banner ${className}`} style={style}>
+const Banner = ({ className, children, style })=>{
+  const dispatch = useDispatch();  
+  return (
+    <>
+        <div className={`container banner ${className}`} style={style} onClick={(e)=>dispatch(login())}>
           {children}
         </div>
       </>
-    );
-  }
+  )
 }
 
 export default Banner;
