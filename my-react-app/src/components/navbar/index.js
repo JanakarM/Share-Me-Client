@@ -6,7 +6,7 @@ class Navbar extends Component {
   render() {
     return (
       <>
-        <nav className="navbar">
+        <nav className="navbar fixed">
           <ul className="navbar-menu">
             <li>
               <NavLink
