@@ -1,14 +1,23 @@
-import {GoogleLogin} from 'react-google-login';
 import bg from '../../assets/videos/share.mp4'
-import {FcGoogle} from 'react-icons/fc'
 import logo from '../../assets/images/logowhite.png'
+import jwt_decode from 'jwt-decode'
+import { login } from '../../state-management/reducers/logon-reducer'
+import { useDispatch, useSelector } from 'react-redux'
+import { Navigate } from 'react-router-dom'
 
-const responseGoogle = (response)=>{
-    console.log('Google response');
-    console.log(response);
-}
 const Login = ()=>{
+    const dispatch = useDispatch()
+    const user = useSelector(state => state.logon.user)
+    const responseGoogle = (response)=>{
+        console.log('Google response success');
+        console.log(response);
+        const userObj = jwt_decode(response.credential)
+        console.log(userObj)
+        dispatch(login(userObj))
+    }
+    window.responseGoogle = responseGoogle
     return (
+        user === undefined ? 
         <div className='h-screen'>
             <div className='w-full h-full'>
                 <video
@@ -25,29 +34,19 @@ const Login = ()=>{
                     <img 
                         src={logo}
                         width='130px'
+                        alt={"app-logo"}
                     />
                 </div>
                 <div className='shadow-2xl'>
-                    <GoogleLogin
-                        clientId={process.env.REaCT_APP_GOOGLE_API_CLIENT_ID}
-                        render={(renderProps)=>(
-                            <button
-                                type='button'
-                                onClick={renderProps.onClick}
-                                disabled={renderProps.disabled}
-                                className='flex flex-row p-3 items-center justify-center bg-mainColor rounded-lg outline-none cursor-pointer'
-                            >
-                                <FcGoogle className='mr-4'/> 
-                                Sign in with Google
-                            </button>
-                        )}
-                        onSuccess={responseGoogle}
-                        onFailure={responseGoogle}
-                        cookiePolicy='single_host_origin'
-                    />
+                    <div id="g_id_onload"
+                        data-client_id={process.env.REaCT_APP_GOOGLE_API_CLIENT_ID}
+                        data-callback="responseGoogle">
+                    </div>
+                    <div className="g_id_signin" data-type="standard"></div>
                 </div>
             </div>
         </div>
+        : <Navigate to='/' />
     );
 }
 

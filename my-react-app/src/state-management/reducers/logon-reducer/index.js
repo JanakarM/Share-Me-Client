@@ -3,11 +3,12 @@ import {createSlice} from '@reduxjs/toolkit';
 const slice = createSlice({
     name: 'logon',
     initialState: {
-        logged_in: false
+        logged_in: false,
+        user: undefined
     },
     reducers: {
-        login: (state) => {
-            return {logged_in: !state.logged_in}
+        login: (state, { payload }) => {
+            return {logged_in: true, user: payload}
         },
         logout: (state) => {
             return {logged_in: false}
