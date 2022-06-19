@@ -1,9 +1,11 @@
-import { Component } from "react";
+import { useDispatch } from "react-redux";
 import { NavLink } from "react-router-dom";
+import { logout } from "../../state-management/reducers/logon-reducer";
+import { setAuthToken } from "../../utils";
 import "./styles.css";
 
-class Navbar extends Component {
-  render() {
+const Navbar = () => {
+  const dispatch = useDispatch()
     return (
       <>
         <nav className="navbar fixed">
@@ -36,6 +38,10 @@ class Navbar extends Component {
               <NavLink
                 to="/about"
                 className={({ isActive }) => (isActive ? "active" : "")}
+                onClick={(event) => {
+                  setAuthToken(undefined)
+                  dispatch(logout())
+                }}
               >
                 About
               </NavLink>
@@ -45,6 +51,5 @@ class Navbar extends Component {
       </>
     );
   }
-}
 
 export default Navbar;

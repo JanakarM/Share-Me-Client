@@ -11,7 +11,7 @@ const slice = createSlice({
             return {logged_in: true, user: payload}
         },
         logout: (state) => {
-            return {logged_in: false}
+            return {logged_in: false, user: undefined}
         }
     }
 });
