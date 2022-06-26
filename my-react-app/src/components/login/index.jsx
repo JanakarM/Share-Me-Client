@@ -1,7 +1,7 @@
 import bg from '../../assets/videos/share.mp4'
 import logo from '../../assets/images/logowhite.png'
 import { useDispatch, useSelector } from 'react-redux'
-import { Navigate } from 'react-router-dom'
+import { Navigate, useParams } from 'react-router-dom'
 import { getUserFromToken, setAuthToken } from '../../utils'
 import { login } from '../../state-management/reducers/logon-reducer'
 import { useEffect } from 'react'
@@ -10,6 +10,7 @@ import { useRef } from 'react'
 const Login = ()=>{
     const user = useSelector(state => state.logon.user)
     const dispatch = useDispatch()
+    const { route, id }= useParams()
     const responseGoogle = (response)=>{
         const token = response.credential
         setAuthToken(token)
@@ -57,7 +58,7 @@ const Login = ()=>{
                 </div>
             </div>
         )
-        : (<Navigate to='/' />)
+        : (<Navigate to={`/${route? route+ (id? '/'+id: '') : ''}`} />)
     );
 }
 
