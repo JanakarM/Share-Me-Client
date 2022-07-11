@@ -5,7 +5,7 @@ import { Route, Routes, Link} from 'react-router-dom'
 import logo from '../../assets/images/logo.png'
 import { Sidebar, UserProfile, Pins } from '../../components'
 import { useDispatch, useSelector } from 'react-redux'
-import { setToggleSidebar } from '../../state-management/reducers/home-reducer'
+import { setToggleSidebar, updateCategories } from '../../state-management/reducers/home-reducer'
 
 const Home= ()=> {
     const user= useSelector(state=> state.logon.user);
@@ -16,6 +16,7 @@ const Home= ()=> {
     }
     useEffect(()=> {
         scrollRef.current.scrollTo(0,0)
+        dispatch(updateCategories())
     }, [])
     const dispatch= useDispatch()
     return (
@@ -31,7 +32,7 @@ const Home= ()=> {
                         <img src={logo} alt="logo" className="w-28 cursor-default" />
                     </Link>
                     <Link to='/user-profile'>
-                        <img src={user?.picture} alt="user-img" className="w-12 rounded-full" />
+                        <img src={`/file/download?fileName=${user.profilePicUrl}`} alt="user-img" className="w-12 rounded-full" />
                     </Link>
                 </div>
                 {(toggleSidebar && 

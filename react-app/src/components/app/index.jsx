@@ -14,7 +14,9 @@ const App = ()=>{
     useEffect(()=>{
       const token = getAuthToken()
       if(token !== undefined && user === undefined){
-        dispatch(login(getUserFromToken(token)))
+        const user= getUserFromToken(token)
+        const { name, email, picture } = user;
+        dispatch(login({ name, email, picture }))
       }
     }, [])
     return (
@@ -36,6 +38,12 @@ const App = ()=>{
             path="/login"
             element={
               <Login />
+            }
+          />
+          <Route
+            path="/file/*"
+            element={
+              <Home />
             }
           />
           <Route

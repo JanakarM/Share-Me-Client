@@ -23,15 +23,15 @@ const Sidebar= ({ user, closeToggleSidebar })=> {
                     Home
                 </NavLink>
                 <h6 className='mt-2 px-5 text-base 2xl:text-xl'>Discover Categories</h6>
-                {categories.slice(0, categories.length-1).map(({name})=> (
-                    <NavLink to={`/category/${name}`} key={name} className={({ isActive })=> isActive? activeStyles: inActiveStyles} onClick={(e)=> handleCloseToggle()}>
-                        {name}
+                {categories.slice(0, categories.length-1).map(({categoryName})=> (
+                    <NavLink to={`/category/${categoryName}`} key={categoryName} className={({ isActive })=> isActive? activeStyles: inActiveStyles} onClick={(e)=> handleCloseToggle()}>
+                        {categoryName}
                     </NavLink>
                 ))}
             </div>
             {( user && 
                 <Link to={`/user-profile/${user?.email}`} className='flex bg-white rounded-lg shadow-lg items-center m-3 p-3 gap-3' onClick={(e)=> handleCloseToggle()}>
-                    <img src={user?.picture} alt="user-profile" className="rounded-full w-10 h-10" />
+                    <img src={`/file/download?fileName=${user.profilePicUrl}`} alt="user-profile" className="rounded-full w-10 h-10" />
                     {user?.name}
                 </Link>
             )}

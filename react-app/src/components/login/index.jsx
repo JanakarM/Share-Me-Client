@@ -13,7 +13,8 @@ const Login = ()=>{
     const responseGoogle = (response)=>{
         const token = response.credential
         setAuthToken(token)
-        dispatch(login(getUserFromToken(token)))
+        const { name, email, picture } = getUserFromToken(token);
+        dispatch(login({ name, email, picture }))
     }
     const signInDiv = useRef()
     useEffect(()=>{

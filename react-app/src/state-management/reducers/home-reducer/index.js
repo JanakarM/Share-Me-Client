@@ -6,13 +6,6 @@ const slice = createSlice({
         toggleSidebar: false,
         searchTerm: '',
         categories: [
-            {name: 'Animals'},
-            {name: 'Plants'},
-            {name: 'Food'},
-            {name: 'Sports'},
-            {name: 'Studies'},
-            {name: 'Celebrity'},
-            {name: 'other'}
         ],
         feeds: [
         ],
@@ -42,8 +35,15 @@ const slice = createSlice({
         },
         setCreatePinStatus: (state, { payload }) => {
             return {...state, createPinStatus: payload}
+        },
+        updateCategories: (state, { payload }) => {
+        },
+        setCategories: (state, { payload }) => {
+            return {...state, categories: payload}
+        },
+        deletePost: (state, { payload }) => {
         }
     }
 });
-export const { setToggleSidebar, setSearchTerm, setFeeds, savePost, unSavePost, createPost, updateFeeds, setCreatePinStatus } = slice.actions;
+export const { setToggleSidebar, setSearchTerm, setFeeds, savePost, unSavePost, createPost, updateFeeds, setCreatePinStatus, updateCategories, setCategories, deletePost } = slice.actions;
 export default slice.reducer;

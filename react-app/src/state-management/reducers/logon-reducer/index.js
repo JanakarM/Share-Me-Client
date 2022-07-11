@@ -8,6 +8,8 @@ const slice = createSlice({
     },
     reducers: {
         login: (state, { payload }) => {
+        },
+        setLoggedInUser: (state, { payload }) => {
             return {logged_in: true, user: payload}
         },
         logout: (state) => {
@@ -15,5 +17,5 @@ const slice = createSlice({
         }
     }
 });
-export const {login, logout} = slice.actions;
+export const {login, logout, setLoggedInUser} = slice.actions;
 export default slice.reducer;

@@ -16,7 +16,7 @@ const Navbar = ({ user, searchTerm, setSearchTerm }) => {
           />
         </div>
         <Link to={`/user-detail/${user?.email}`} className="hidden md:block cursor-pointer">
-          <img src={user?.picture} alt="user-img" className="w-12 rounded-full" />
+          <img src={`/file/download?fileName=${user.profilePicUrl}`} alt="user-img" className="w-12 rounded-full" />
         </Link>
         <Link to='/create-pin' className="cursor-pointer flex items-center justify-center bg-white shadow-md hover:shadow-xl border-2 border-gray w-12 h-10 rounded-xl">
           <IoMdAdd />

@@ -22,12 +22,8 @@ const CreatePin= ()=> {
         formData.append('about', about);
         formData.append('image', uploadedImageFile);
         formData.append('site', site);
-        formData.append('categoryName', category);
-        formData.append('postedBy', {
-            id: user.email,
-            email: user.name,
-            picture: user.picture
-        })
+        formData.append('category', category);
+        formData.append('author', user.id)
         return formData
     }
     useEffect(()=> {
@@ -37,6 +33,11 @@ const CreatePin= ()=> {
             dispatch(setCreatePinStatus(undefined))
         }
     }, [createPinStatus])
+    useEffect(()=> {
+        if(categories[0] != undefined){
+            setCategory(categories[0].id)
+        }
+    }, [categories])
     const uploadImage=(e)=> {
         const file= e.target.files[0]
         const { type, name }= file
@@ -94,7 +95,7 @@ const CreatePin= ()=> {
                     <input value={title} onChange={(e)=> setTitle(e.target.value)} type="text" placeholder="Add title" className="px-2 py-1 w-full rounded-lg outline-none border-b-2 focus-within:shadow-md"/>
                 </div>
                 <div className="mt-5 flex gap-2 items-center shadow-sm p-2 rounded-full">
-                    <img src={user.picture} width={50} alt="user-profile" className="rounded-full"/>
+                    <img src={`/file/download?fileName=${user.profilePicUrl}`} width={50} alt="user-profile" className="rounded-full"/>
                     <p className="text-3xl font-semibold">{user?.name}</p>
                 </div>
                 <div className="mt-5 w-full">
@@ -107,9 +108,9 @@ const CreatePin= ()=> {
                     <p className="font-bold text-xl">
                         Choose category
                     </p>
-                    <select className="mt-3 w-4/5 p-2 rounded-lg cursor-pointer bg-white border-b-2 focus-within:shadow-md" onChange={(e)=> setCategory(e.target.value)}>
+                    <select className="mt-3 w-full p-2 rounded-lg cursor-pointer bg-white border-b-2 focus-within:shadow-md" onChange={(e)=> setCategory(e.target.value)}>
                         {categories.map((c)=> (
-                            <option key={c.name} className="bg-white" value={c.name}>{c.name}</option>
+                            <option key={c.id} className="bg-white" value={c.id}>{c.categoryName}</option>
                         ))}
                     </select>
                 </div>

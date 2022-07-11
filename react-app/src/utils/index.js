@@ -1,12 +1,12 @@
 import jwt_decode from 'jwt-decode'
 
 export const setAuthToken = (token) => {
-    document.cookie = `authtoken=${token}`
+    document.cookie = `image_share_token=${token}`
 }
 export const getAuthToken = () => {
     const cookie = document.cookie
     const val = cookie.split("; ").find(val => {
-        return val.indexOf("authtoken=") !== -1
+        return val.indexOf("image_share_token=") !== -1
     })?.split("=")[1]
     return val === "undefined" ? undefined : val
 }
