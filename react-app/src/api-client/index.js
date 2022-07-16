@@ -18,3 +18,13 @@ export const deletePost= (feedId)=> {
 export const addUser= (user)=> {
     return axios.post('/user/add', user)
 }
+
+export const downloadImage= (fileName)=> {
+    let config = {
+        headers: {
+            Accept: 'image/**'
+        },
+        responseType: 'blob'
+      }
+    return axios.get('/file/download?fileName='+fileName, config)
+}

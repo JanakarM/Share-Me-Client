@@ -2,19 +2,28 @@ import { Link, useNavigate } from "react-router-dom"
 import { MdDownloadForOffline } from 'react-icons/md'
 import { AiTwotoneDelete } from 'react-icons/ai'
 import { BsFillArrowUpRightCircleFill } from 'react-icons/bs'
-import React, { useState} from "react"
 import { useDispatch, useSelector } from "react-redux"
 import { deletePost, savePost, unSavePost } from "../../state-management/reducers/home-reducer"
 import animalImg from '../../assets/images/animals/1.jpg'
+import { useEffect, useRef, useState } from "react"
+import { downloadImage } from "../../api-client"
+import {Buffer} from 'buffer';
 
 const Pin= ({ pin: {id, imageUrl, author, siteUrl, postSaved, savedCount}})=> {
     const navigate= useNavigate()
     const dispatch= useDispatch()
     const user= useSelector(state=> state.logon.user)
+    const [imageBlobUrl, setImageBlobUrl]= useState("")
 
     // used local state as there is no need to pass around this piece of data between compoenents.
     const [ postHovered, setPostHovered ]= useState(false)
 
+    useEffect(()=> {
+        async function getImage(){
+            const { data }= await downloadImage(imageUrl)
+            setImageBlobUrl(URL.createObjectURL(new Blob([data], { type: 'image/jpg'})))
+        }
+        getImage()}, [])
     const savePin= ()=> {
         dispatch(savePost([id, user?.email]))
     }
@@ -26,7 +35,7 @@ const Pin= ({ pin: {id, imageUrl, author, siteUrl, postSaved, savedCount}})=> {
     const deletePin= ()=> {
         dispatch(deletePost(id))
     }
-
+    
     return (
         <div className="m-1 mb-2">
             <div className="relative cursor-zoom-in" 
@@ -34,12 +43,14 @@ const Pin= ({ pin: {id, imageUrl, author, siteUrl, postSaved, savedCount}})=> {
                 onMouseLeave={(e)=> setPostHovered(false)}
                 onClick={(e)=> navigate(`/pin-detail/${id}`)}
             >
-                <img src={`/file/download?fileName=${imageUrl}`} alt="pin" className={`rounded-lg`}/>
+                <img src={imageBlobUrl} alt="pin" className={`rounded-lg`}/>
                 {( postHovered &&
                     <div className="absolute top-0 left-0 flex flex-col justify-between h-full w-full p-2">
                         <div className="flex justify-between items-center">
-                            <a href={`/file/download?fileName=${imageUrl}`} onClick={(e)=> e.stopPropagation()}
-                                target='_blank'
+                            <a 
+                                href={imageBlobUrl}
+                                onClick={(e)=> e.stopPropagation()}
+                                download={imageUrl}
                                 className="bg-white rounded-full p-1 cursor-pointer opacity-75 hover:opacity-100"
                             >
                                 <MdDownloadForOffline />
