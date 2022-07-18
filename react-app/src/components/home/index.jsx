@@ -15,8 +15,8 @@ const Home= ()=> {
         dispatch(setToggleSidebar(val))
     }
     useEffect(()=> {
-        scrollRef.current.scrollTo(0,0)
         dispatch(updateCategories())
+        scrollRef.current.scrollTo(0,0)
     }, [])
     const dispatch= useDispatch()
     return (

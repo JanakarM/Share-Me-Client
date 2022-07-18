@@ -16,11 +16,12 @@ const Feed= ()=> {
         dispatch(updateFeeds())
         setLoading(false)
     }, [])
-    let feeds= useSelector(state=> state.home.feeds)
     
+    let feeds= useSelector(state=> state.home.feeds)
     if(categoryId !== undefined){
-        feeds= feeds.filter(feed=> feed.categoryName === categoryId)
+        feeds= feeds.filter(feed=> feed.category.id === parseInt(categoryId))
     }
+    
     if(loading) return <Spinner message='We are loading new ideas to your feed!'/>
     if(feeds.length === 0) return (
         <div className="flex flex-col items-center justify-end w-full h-full py-10 my-10 gap-4">

@@ -15,8 +15,18 @@ export const deletePost= (feedId)=> {
     return axios.delete(`/feed/${feedId}`)
 }
 
-export const addUser= (user)=> {
-    return axios.post('/user/add', user)
+export const getLoggedInUser= ()=> {
+    return axios.get('/user/me').catch((err)=> {
+        return { error_code: err.response.status }
+    })
+}
+
+export const login= (token)=> {
+    return axios.get('/user/login', {
+        headers: {
+            Authorization: "Bearer " + JSON.parse(JSON.stringify(token))
+        }
+    })
 }
 
 export const downloadImage= (fileName)=> {

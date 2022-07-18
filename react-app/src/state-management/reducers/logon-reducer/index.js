@@ -14,8 +14,10 @@ const slice = createSlice({
         },
         logout: (state) => {
             return {logged_in: false, user: undefined}
+        },
+        getLoggedInUser: (state) => {
         }
     }
 });
-export const {login, logout, setLoggedInUser} = slice.actions;
+export const {login, logout, setLoggedInUser, getLoggedInUser} = slice.actions;
 export default slice.reducer;

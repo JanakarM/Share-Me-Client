@@ -11,10 +11,8 @@ const Login = ()=>{
     const dispatch = useDispatch()
     const { route, id }= useParams()
     const responseGoogle = (response)=>{
-        const token = response.credential
-        setAuthToken(token)
-        const { name, email, picture } = getUserFromToken(token);
-        dispatch(login({ name, email, picture }))
+        console.log('token: '+response.credential)
+        dispatch(login(response.credential))
     }
     const signInDiv = useRef()
     useEffect(()=>{
