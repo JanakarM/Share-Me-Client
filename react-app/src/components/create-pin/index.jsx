@@ -74,7 +74,7 @@ const CreatePin= ()=> {
                                 <img src={imageAsset} alt="uploaded-image" 
                                     className="w-full h-full object-cover"/>
                                 <button onClick={(e)=> setImageAsset(null)} 
-                                    className="bg-white p-2 rounded-full cursor-pointer outline-none hover-shadow-xl transition-all duration-150 ease-in-out absolute bottom-3 right-3">
+                                    className="bg-white p-2 rounded-full cursor-pointer outline-none hover:shadow-xl transition-all duration-150 ease-in-out absolute bottom-3 right-3">
                                     <MdDelete />
                                 </button>
                             </div> ):(

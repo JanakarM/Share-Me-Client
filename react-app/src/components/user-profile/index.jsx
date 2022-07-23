@@ -18,17 +18,17 @@ const UserProfile= ()=> {
             <Spinner />
         ): (  (
             <div className="w-full h-full bg-white flex flex-col items-center gap-20">
-                <div className="py-5 bg-gray-50 w-full flex justify-center items-center shadow-md">
+                <div className="py-5 bg-gray-50 w-full min-h-30 max-h-50 flex justify-center items-center shadow-md p-10">
                     <img src={`/file/download?fileName=${user?.profilePicUrl}`} alt="user-profile" 
-                        className="w-1/4 rounded-full shadow-lg" />
+                        className="rounded-full max-h-full shadow-lg" />
                 </div>
-                <div className="flex flex-col items-center gap-10 w-full px-10">
-                    <div className="flex gap-10 w-full">
-                        <label className="flex text-lg font-semibold w-2/5 justify-end"><span>Name</span></label>
+                <div className="flex flex-col items-center justify-between gap-10 w-full px-10">
+                    <div className="flex w-full">
+                        <label className="flex text-lg font-semibold w-1/2 justify-end pr-10"><span>Name</span></label>
                         <label className="text-lg text-gray-500">{user?.name}</label>
                     </div>
-                    <div className="flex gap-10 w-full">
-                        <label className="flex text-lg font-semibold w-2/5 justify-end"><span>Email</span></label>
+                    <div className="flex  w-full">
+                        <label className="flex text-lg font-semibold w-1/2 justify-end pr-10"><span>Email</span></label>
                         <label className="text-lg text-gray-500">{user?.email}</label>
                     </div>
                 </div>

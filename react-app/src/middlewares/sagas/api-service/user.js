@@ -1,15 +1,17 @@
 import { call, put, takeEvery } from "redux-saga/effects";
 import * as Api from '../../../api-client'
 import { getUserProfile, setUserProfile } from "../../../state-management/reducers/home-reducer";
-import { getLoggedInUser, login, setLoggedInUser } from "../../../state-management/reducers/logon-reducer";
+import { getLoggedInUser, login, setLoggedInUser, setSavedFeedIds } from "../../../state-management/reducers/logon-reducer";
 
 function* loginHandler(action){
     const {data}= yield call(Api.login, action.payload)
     yield put(setLoggedInUser(data))
 }
 function* getLoggedInUserHandler(action){
-    const { data }= yield call(Api.getLoggedInUser)
-    yield put(setLoggedInUser(data))
+    let { data }= yield call(Api.getLoggedInUser)
+    yield put(setLoggedInUser(data));
+    ({ data } = yield call(Api.getSavedPostIds))
+    yield put(setSavedFeedIds(data))
 }
 function* getUserHandler(action){
     const { data }= yield call(Api.getUser, action.payload)

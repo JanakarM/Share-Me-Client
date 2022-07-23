@@ -13,7 +13,8 @@ const slice = createSlice({
         userProfileLoading: false,
         pinDetailLoading: false,
         pinDetail: undefined,
-        userProfile: undefined
+        userProfile: undefined,
+        feedsLoading: false
     },
     reducers: {
         setToggleSidebar: (state, { payload }) => {
@@ -23,7 +24,7 @@ const slice = createSlice({
             return {...state, searchTerm: payload}
         },
         setFeeds: (state, { payload }) => {
-            return {...state, feeds: payload}
+            return {...state, feeds: payload, feedsLoading: false}
         },
         savePost: (state, { payload }) => {
             
@@ -35,7 +36,7 @@ const slice = createSlice({
             
         },
         updateFeeds: (state, { payload }) => {
-            
+            return {...state, feedsLoading: true}
         },
         setCreatePinStatus: (state, { payload }) => {
             return {...state, createPinStatus: payload}

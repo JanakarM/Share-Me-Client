@@ -8,18 +8,25 @@ import { useDispatch } from "react-redux";
 import { updateFeeds } from "../../state-management/reducers/home-reducer";
 
 const Feed= ()=> {
-    const { categoryId }= useParams()
-    const [loading, setLoading] = useState(false)
+    const { categoryId, tag }= useParams()
+    const loading= useSelector(state=> state.home.feedLoading)
+    const searchTerm= useSelector(state=> state.home.searchTerm)
+    const savedFeedIds= useSelector(state=> state.logon.savedFeedIds)
     const dispatch= useDispatch()
     useEffect(()=> {
-        setLoading(true)
         dispatch(updateFeeds())
-        setLoading(false)
     }, [])
     
     let feeds= useSelector(state=> state.home.feeds)
     if(categoryId !== undefined){
         feeds= feeds.filter(feed=> feed.category.id === parseInt(categoryId))
+    }
+    if(tag === 'saved'){
+        feeds= feeds.filter(feed=> savedFeedIds.includes(feed.id))
+    }
+    if(searchTerm !== ''){
+        const searchTermUpperCase= searchTerm.toUpperCase()
+        feeds= feeds.filter(feed=> feed.title.toUpperCase().indexOf(searchTermUpperCase) !== -1 || feed.about.toUpperCase().indexOf(searchTermUpperCase) !== -1)
     }
     
     if(loading) return <Spinner message='We are loading new ideas to your feed!'/>
@@ -31,7 +38,7 @@ const Feed= ()=> {
     )
     return (
         <div>
-            {feeds && <MasonryLayout feeds={feeds}/>}
+            {feeds && <MasonryLayout feeds={feeds} savedPins={tag === 'saved'} />}
         </div>
     )
 }

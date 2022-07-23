@@ -10,7 +10,7 @@ const Navbar = ({ user, searchTerm, setSearchTerm }) => {
       <div className="flex my-3 w-full gap-3 md:gap-5 items-center">
         <div className="flex p-2 items-center bg-white w-full outline-none border-none focus-within:shadow-lg rounded-md">
           <IoMdSearch fontSize={21} />
-          <input className="outline-none w-full ml-1" placeholder="Search" onFocus={()=> navigate('/search')}
+          <input className="outline-none w-full ml-1" placeholder="Search" onFocus={()=> navigate('/')}
             value={searchTerm}
             onChange={(e)=> {setSearchTerm(e.target.value)}}
           />

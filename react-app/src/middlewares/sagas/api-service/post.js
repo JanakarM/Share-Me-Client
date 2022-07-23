@@ -1,12 +1,15 @@
 import { call, put, takeEvery } from 'redux-saga/effects'
-import { savePost, setCreatePinStatus, setFeeds, updateFeeds, createPost, updateCategories, setCategories, deletePin, deletePost, getPinDetail, setPinDetail } from '../../../state-management/reducers/home-reducer'
+import { savePost, setCreatePinStatus, setFeeds, updateFeeds, createPost, updateCategories, setCategories, deletePin, deletePost, getPinDetail, setPinDetail, unSavePost } from '../../../state-management/reducers/home-reducer'
 import * as Api from '../../../api-client'
+import { setSavedFeedIds } from '../../../state-management/reducers/logon-reducer'
 
 //handler function starts
 
 function* fetchPostsHandler(action){
-    const { data }= yield call(Api.getAllPosts)
-    yield put(setFeeds(data))
+    let { data }= yield call(Api.getAllPosts)
+    yield put(setFeeds(data));
+    ({ data } = yield call(Api.getSavedPostIds))
+    yield put(setSavedFeedIds(data))
 }
 
 function* fetchCategoriesHandler(action){
@@ -30,12 +33,32 @@ function* getPostDetilHanlder(action){
     yield put(setPinDetail(data))
 }
 
+function* savePostHanlder(action){
+    yield call(Api.savePost, action.payload)
+    const { data } = yield call(Api.getSavedPostIds)
+    yield put(setSavedFeedIds(data))
+}
+
+function* removeSavedPostHanlder(action){
+    yield call(Api.removeSavedPost, action.payload)
+    const { data } = yield call(Api.getSavedPostIds)
+    yield put(setSavedFeedIds(data))
+}
+
 //handler function ends
 
 //watcher functions starts
 
 export function* fetchPostsSaga(action){
-    yield takeEvery([savePost.type, updateFeeds.type], fetchPostsHandler)
+    yield takeEvery([updateFeeds.type], fetchPostsHandler)
+}
+
+export function* savePostSaga(action){
+    yield takeEvery([savePost.type], savePostHanlder)
+}
+
+export function* removeSavedPostSaga(action){
+    yield takeEvery([unSavePost.type], removeSavedPostHanlder)
 }
 
 export function* fetchCategoriesSaga(action){

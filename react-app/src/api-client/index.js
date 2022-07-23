@@ -1,36 +1,62 @@
 import axios from 'axios'
 
+const getMethod= async (url, config)=> {
+    try {
+        return await axios.get(url, config)
+    } catch (err) {
+        return { error_code: err.response.status }
+    }
+} 
 export const getAllPosts= ()=> {
-    return axios.get('/feed')
+    return getMethod('/feed')
+}
+export const getSavedPostIds= ()=> {
+    return getMethod('/feed/saved')
 }
 
 export const getPost= (id)=> {
-    return axios.get(`/feed/${id}`)
+    return getMethod(`/feed/${id}`)
 }
 
 export const getCategories= ()=> {
-    return axios.get('/feed/categories')
+    return getMethod('/feed/categories')
 }
 
-export const createPost= (feed)=> {
-    return axios.post('/feed/add', feed)
+export const createPost= async (feed)=> {
+    try {
+        return await axios.post('/feed/add', feed)
+    } catch (err) {
+        return { error_code: err.response.status }
+    }
+}
+export const savePost= async (feedId)=> {
+    try {
+        return await axios.post('/feed/save', {feedId})
+    } catch (err) {
+        return { error_code: err.response.status }
+    }
+}
+export const removeSavedPost= async (feedId)=> {
+    try {
+        return await axios.delete(`/feed/saved/remove?feedId=${feedId}`)
+    } catch (err) {
+        return { error_code: err.response.status }
+    }
 }
 export const deletePost= (feedId)=> {
     return axios.delete(`/feed/${feedId}`)
 }
 
 export const getLoggedInUser= ()=> {
-    return axios.get('/user/me').catch((err)=> {
-        return { error_code: err.response.status }
-    })
+    return getMethod('/user/me')
 }
 
 export const getUser= (id)=> {
-    return axios.get(`/user/${id}`)
+    return getMethod(`/user/${id}`)
 }
 
 export const login= (token)=> {
-    return axios.get('/user/login', {
+    return getMethod('/user/login', {
         headers: {
             Authorization: "Bearer " + JSON.parse(JSON.stringify(token))
         }
@@ -44,5 +70,5 @@ export const downloadImage= (fileName)=> {
         },
         responseType: 'blob'
       }
-    return axios.get('/file/download?fileName='+fileName, config)
+    return getMethod('/file/download?fileName='+fileName, config)
 }

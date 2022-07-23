@@ -47,6 +47,7 @@ const Home= ()=> {
             <div className='flex-1 h-screen overflow-y-scroll' ref={scrollRef}>
                 <Routes>
                     <Route path='/*' element={<Pins user={user}/>} />
+                    <Route path='/feeds/:tag' element={<Pins user={user} />} />
                     <Route path='/user-profile/:userId' element={<UserProfile />} />
                     <Route path='/pin-detail/:pinId' element={<PinDetail />} />
                     <Route path='/create-pin' element={<CreatePin />} />

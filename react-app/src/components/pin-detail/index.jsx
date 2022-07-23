@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from "react-redux"
 import { useParams, Link } from "react-router-dom"
 import { getPinDetail } from "../../state-management/reducers/home-reducer"
 import { Spinner } from "../../components"
+import { BiLinkExternal, BiLink } from 'react-icons/bi'
 
 const PinDetail= ()=> {
     const { pinId }= useParams()
@@ -17,23 +18,23 @@ const PinDetail= ()=> {
         loading ? (
             <Spinner></Spinner>
         ): (
-            <div className="w-full h-full flex flex-col items-center p-10 gap-10">
-                <div>
+            <div className="w-full h-full flex flex-col p-10">
+                <div className="w-full max-h-70 flex">
                     <img src={`/file/download?fileName=${pin?.imageUrl}`} alt="" 
-                    className="rounded-lg"/>
+                    className="rounded-lg max-h-full"/>
                 </div>
-                <div className="flex flex-col items-center gap-10 w-full px-10">
-                    <div className="flex gap-10 w-full">
-                        <label className="flex text-lg font-semibold w-2/5 justify-end"><span>About</span></label>
+                <div className="flex flex-col gap-10 py-10 pl-5">
+                    <div className="flex gap-5">
+                        <label className="w-100 flex text-lg font-semibold"><span>About</span></label>
                         <label className="text-lg text-gray-500">{pin?.about}</label>
                     </div>
-                    <div className="flex gap-10 w-full">
-                        <label className="flex text-lg font-semibold w-2/5 justify-end"><span>Site</span></label>
-                        <a target="_blank" className="text-lg text-gray-500" href={pin?.siteUrl}>{pin?.siteUrl}</a>
+                    <div className="flex gap-5">
+                        <label className="w-100 flex text-lg font-semibold"><span>Site</span></label>
+                        <a target="_blank" className="hover:underline hover:shadow-sm hover:text-black text-lg text-gray-500" href={pin?.siteUrl}>{pin?.siteUrl}<BiLinkExternal className="inline ml-1 text-black"/></a>
                     </div>
-                    <div className="flex gap-10 w-full">
-                        <label className="flex text-lg font-semibold w-2/5 justify-end"><span>Author</span></label>
-                        <Link to={`/user-profile/${pin?.author.id}`} className="text-lg text-gray-500">{pin?.author.name}</Link>
+                    <div className="flex gap-5">
+                        <label className="w-100 flex text-lg font-semibold"><span>Author</span></label>
+                        <Link to={`/user-profile/${pin?.author.id}`} className="hover:underline hover:shadow-sm hover:text-black text-lg text-gray-500">{pin?.author.name}<BiLink className="inline ml-1 text-black"/></Link>
                     </div>
                 </div>
             </div>

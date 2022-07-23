@@ -1,5 +1,5 @@
 import React from 'react'
-import { RiHomeFill } from 'react-icons/ri'
+import { RiHomeFill, RiSaveFill } from 'react-icons/ri'
 import { IoIosArrowForward } from 'react-icons/io'
 import { NavLink, Link } from 'react-router-dom'
 import logo from '../../assets/images/logo.png'
@@ -21,6 +21,10 @@ const Sidebar= ({ user, closeToggleSidebar })=> {
                 <NavLink to='/' className={({ isActive })=> isActive? activeStyles: inActiveStyles} onClick={(e)=> handleCloseToggle()}>
                     <RiHomeFill fontSize={15} /> 
                     Home
+                </NavLink>
+                <NavLink to='/feeds/saved' className={({ isActive })=> isActive? activeStyles: inActiveStyles} onClick={(e)=> handleCloseToggle()}>
+                    <RiSaveFill fontSize={15} /> 
+                    Saved
                 </NavLink>
                 <h6 className='mt-2 px-5 text-base 2xl:text-xl'>Discover Categories</h6>
                 {categories.slice(0, categories.length-1).map(({id, categoryName})=> (

@@ -4,7 +4,7 @@ import { Route, Routes } from 'react-router-dom'
 import { Navbar, Feed } from '../../components'
 import { setSearchTerm } from '../../state-management/reducers/home-reducer'
 
-const Pins= ({user})=> {
+const Pins= ({ user })=> {
     const searchTerm= useSelector(state=> state.home.searchTerm)
     const dispatch= useDispatch();
     const updateSearchTerm=(val)=> {

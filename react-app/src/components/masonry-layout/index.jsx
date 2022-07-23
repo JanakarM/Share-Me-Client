@@ -2,7 +2,7 @@ import Masonry from 'react-masonry-css'
 import { Pin } from '../'
 import React from 'react'
 
-const MasonryLayout= ({ feeds })=> {
+const MasonryLayout= ({ feeds, savedPins })=> {
     const breakPointObj= {
         default: 4,
         3000: 6,
@@ -15,7 +15,7 @@ const MasonryLayout= ({ feeds })=> {
         <div>
             <Masonry className='flex animate-slide-fwd' breakpointCols={breakPointObj}>
                 { feeds.map(feed=> (
-                    <Pin key={feed.id} pin={feed} />
+                    <Pin key={feed.id} pin={feed} savedPin={savedPins} />
                 )) }
             </Masonry>
         </div>

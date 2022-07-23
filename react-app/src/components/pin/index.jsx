@@ -9,11 +9,13 @@ import { useEffect, useRef, useState } from "react"
 import { downloadImage } from "../../api-client"
 import {Buffer} from 'buffer';
 
-const Pin= ({ pin: {id, imageUrl, author, siteUrl, postSaved, savedCount}})=> {
+const Pin= ({ pin: {id, imageUrl, author, siteUrl, postSaved, savedCount}, savedPin})=> {
     const navigate= useNavigate()
     const dispatch= useDispatch()
     const user= useSelector(state=> state.logon.user)
+    const savedFeedIds= useSelector(state=> state.logon.savedFeedIds)
     const [imageBlobUrl, setImageBlobUrl]= useState("")
+    const [showSaveOption, setShowSaveOption]= useState(true)
 
     // used local state as there is no need to pass around this piece of data between compoenents.
     const [ postHovered, setPostHovered ]= useState(false)
@@ -24,8 +26,11 @@ const Pin= ({ pin: {id, imageUrl, author, siteUrl, postSaved, savedCount}})=> {
             setImageBlobUrl(URL.createObjectURL(new Blob([data], { type: 'image/jpg'})))
         }
         getImage()}, [])
+    useEffect(()=>{
+        setShowSaveOption(!savedFeedIds?.includes(id))
+    }, [savedFeedIds])
     const savePin= ()=> {
-        dispatch(savePost([id, user?.email]))
+        dispatch(savePost(id))
     }
 
     const unSavePin= ()=> {
@@ -33,7 +38,7 @@ const Pin= ({ pin: {id, imageUrl, author, siteUrl, postSaved, savedCount}})=> {
     }
 
     const deletePin= ()=> {
-        dispatch(deletePost(id))
+        dispatch(savedPin ? unSavePost(id): deletePost(id))
     }
     
     return (
@@ -61,7 +66,7 @@ const Pin= ({ pin: {id, imageUrl, author, siteUrl, postSaved, savedCount}})=> {
                                     >
                                         {savedCount} Saved
                                     </button>
-                                ):(
+                                ):(showSaveOption &&
                                     <button type="button" className="bg-red-500 px-2 pb-1 rounded-3xl shadow-lg font-bold text-sm text-black cursor-pointer opacity-75 hover:opacity-100"
                                         onClick={(e)=> {e.stopPropagation(); savePin()}}
                                     >
