@@ -15,7 +15,7 @@ const Navbar = ({ user, searchTerm, setSearchTerm }) => {
             onChange={(e)=> {setSearchTerm(e.target.value)}}
           />
         </div>
-        <Link to={`/user-detail/${user?.email}`} className="hidden md:block cursor-pointer">
+        <Link to={`/user-profile/${user?.id}`} className="hidden md:block cursor-pointer">
           <img src={`/file/download?fileName=${user.profilePicUrl}`} alt="user-img" className="w-12 rounded-full" />
         </Link>
         <Link to='/create-pin' className="cursor-pointer flex items-center justify-center bg-white shadow-md hover:shadow-xl border-2 border-gray w-12 h-10 rounded-xl">

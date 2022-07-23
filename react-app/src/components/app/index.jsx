@@ -1,64 +1,49 @@
 import React, { useEffect, useState } from "react";
-import { Route, Routes, useNavigate } from "react-router";
+import { Route, Routes, useNavigate, Navigate } from "react-router";
 import "./styles.css";
 import Login from '../login';
 import ProtectedRoute from "../protected-route";
-import { getAuthToken, getUserFromToken } from "../../utils";
 import { useDispatch, useSelector } from "react-redux";
 import { getLoggedInUser, login } from "../../state-management/reducers/logon-reducer";
 import Home from "../home";
+import { Spinner } from '../../components'
 
 const App = ()=>{
-    const [loading, setLoading]= useState(false)
     const user = useSelector(state => state.logon.user)
+    const loading = useSelector(state => state.logon.checkingLoginStatus)
     const dispatch = useDispatch()
-    const navigate= useNavigate()
-    useEffect(()=>{ 
-      setLoading(true)
+    useEffect(()=>{
       dispatch(getLoggedInUser())
-      if(user === undefined){
-          navigate('/login')
-      }
-      setLoading(false)
     }, [])
-    
+    //take spinner logic from here and use it in pin-detail and user-profile components
     return (
-      <div>
-        <Routes>
-          <Route
-            path="/login/:route/:id"
-            element={
-              <Login />
-            }
-          />
-          <Route
-            path="/login/:route"
-            element={
-              <Login />
-            }
-          />
-          <Route
-            path="/login"
-            element={
-              <Login />
-            }
-          />
-          <Route
-            path="/file/*"
-            element={
-              <Home />
-            }
-          />
-          <Route
-            path="/*"
-            element={
-              <ProtectedRoute>
-                <Home />
-              </ProtectedRoute> 
-            }
-          />
-        </Routes>
-      </div>
+      loading ? (
+        <Spinner message='Loading....!!'/>
+      ):(
+        user === undefined ? (
+          <Login />
+        ):
+          (
+            <div>
+            <Routes>
+              <Route
+                path="/file/*"
+                element={
+                  <Home />
+                }
+              />
+              <Route
+                path="/*"
+                element={
+                  <ProtectedRoute>
+                    <Home />
+                  </ProtectedRoute> 
+                }
+              />
+             </Routes>
+            </div>
+          )
+      )
     );
   }
 

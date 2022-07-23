@@ -1,7 +1,7 @@
 import React from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { Route, Routes } from 'react-router-dom'
-import { PinDetail, Navbar, CreatePin, Feed } from '../../components'
+import { Navbar, Feed } from '../../components'
 import { setSearchTerm } from '../../state-management/reducers/home-reducer'
 
 const Pins= ({user})=> {
@@ -19,8 +19,6 @@ const Pins= ({user})=> {
                 <Routes>
                     <Route path='/' element={<Feed />} />
                     <Route path='/category/:categoryId' element={<Feed />} />
-                    <Route path='/pin-detail/:pindId' element={<PinDetail />} />
-                    <Route path='/create-pin' element={<CreatePin />} />
                 </Routes>
             </div>
         </div>

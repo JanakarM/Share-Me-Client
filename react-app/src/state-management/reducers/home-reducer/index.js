@@ -9,7 +9,11 @@ const slice = createSlice({
         ],
         feeds: [
         ],
-        createPinStatus: undefined
+        createPinStatus: undefined,
+        userProfileLoading: false,
+        pinDetailLoading: false,
+        pinDetail: undefined,
+        userProfile: undefined
     },
     reducers: {
         setToggleSidebar: (state, { payload }) => {
@@ -42,8 +46,26 @@ const slice = createSlice({
             return {...state, categories: payload}
         },
         deletePost: (state, { payload }) => {
+        },
+        getPinDetail(state, { payload }){
+            return {...state, pinDetailLoading: true}
+        },
+        setPinDetail(state, { payload }){
+            return {...state, pinDetail: payload, pinDetailLoading: false}
+        },
+        getUserProfile(state, { payload }){
+            return {...state, userProfileLoading: true}
+        },
+        setUserProfile(state, { payload }){
+            return {...state, userProfile: payload, userProfileLoading: false}
         }
     }
 });
-export const { setToggleSidebar, setSearchTerm, setFeeds, savePost, unSavePost, createPost, updateFeeds, setCreatePinStatus, updateCategories, setCategories, deletePost } = slice.actions;
+export const 
+{ 
+    setToggleSidebar, setSearchTerm, setFeeds, savePost,
+    unSavePost, createPost, updateFeeds, setCreatePinStatus,
+    updateCategories, setCategories, deletePost, getPinDetail, 
+    setPinDetail, getUserProfile, setUserProfile
+} = slice.actions;
 export default slice.reducer;

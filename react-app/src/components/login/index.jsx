@@ -18,7 +18,7 @@ const Login = ()=>{
     useEffect(()=>{
         /* global google */
         google.accounts.id.initialize({
-            client_id: process.env.REaCT_APP_GOOGLE_API_CLIENT_ID,
+            client_id: process.env.REACT_APP_GOOGLE_API_CLIENT_ID,
             callback: responseGoogle
         })
 
@@ -56,7 +56,8 @@ const Login = ()=>{
                 </div>
             </div>
         )
-        : (<Navigate to={`/${route? route+ (id? '/'+id: '') : ''}`} />)
+        // : (<Navigate to={`/${route? route+ (id? '/'+id: '') : ''}`} />)
+        : (<Navigate to='/' />)
     );
 }
 

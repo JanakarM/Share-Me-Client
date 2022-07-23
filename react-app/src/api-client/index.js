@@ -4,6 +4,10 @@ export const getAllPosts= ()=> {
     return axios.get('/feed')
 }
 
+export const getPost= (id)=> {
+    return axios.get(`/feed/${id}`)
+}
+
 export const getCategories= ()=> {
     return axios.get('/feed/categories')
 }
@@ -19,6 +23,10 @@ export const getLoggedInUser= ()=> {
     return axios.get('/user/me').catch((err)=> {
         return { error_code: err.response.status }
     })
+}
+
+export const getUser= (id)=> {
+    return axios.get(`/user/${id}`)
 }
 
 export const login= (token)=> {

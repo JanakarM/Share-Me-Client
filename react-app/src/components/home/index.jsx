@@ -3,7 +3,7 @@ import { HiMenu } from 'react-icons/hi'
 import {AiFillCloseCircle} from 'react-icons/ai'
 import { Route, Routes, Link} from 'react-router-dom'
 import logo from '../../assets/images/logo.png'
-import { Sidebar, UserProfile, Pins } from '../../components'
+import { Sidebar, UserProfile, Pins, CreatePin, PinDetail } from '../../components'
 import { useDispatch, useSelector } from 'react-redux'
 import { setToggleSidebar, updateCategories } from '../../state-management/reducers/home-reducer'
 
@@ -31,7 +31,7 @@ const Home= ()=> {
                     <Link to='/' className='cursor-default'>
                         <img src={logo} alt="logo" className="w-28 cursor-default" />
                     </Link>
-                    <Link to='/user-profile'>
+                    <Link to={`/user-profile/${user.id}`}>
                         <img src={`/file/download?fileName=${user.profilePicUrl}`} alt="user-img" className="w-12 rounded-full" />
                     </Link>
                 </div>
@@ -48,6 +48,8 @@ const Home= ()=> {
                 <Routes>
                     <Route path='/*' element={<Pins user={user}/>} />
                     <Route path='/user-profile/:userId' element={<UserProfile />} />
+                    <Route path='/pin-detail/:pinId' element={<PinDetail />} />
+                    <Route path='/create-pin' element={<CreatePin />} />
                 </Routes>
             </div>
         </div>

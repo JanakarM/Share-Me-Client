@@ -30,7 +30,7 @@ const Sidebar= ({ user, closeToggleSidebar })=> {
                 ))}
             </div>
             {( user && 
-                <Link to={`/user-profile/${user?.email}`} className='flex bg-white rounded-lg shadow-lg items-center m-3 p-3 gap-3' onClick={(e)=> handleCloseToggle()}>
+                <Link to={`/user-profile/${user?.id}`} className='flex bg-white rounded-lg shadow-md items-center m-3 p-3 gap-3' onClick={(e)=> handleCloseToggle()}>
                     <img src={`/file/download?fileName=${user.profilePicUrl}`} alt="user-profile" className="rounded-full w-10 h-10" />
                     {user?.name}
                 </Link>

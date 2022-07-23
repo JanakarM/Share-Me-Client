@@ -1,5 +1,6 @@
 import { call, put, takeEvery } from "redux-saga/effects";
 import * as Api from '../../../api-client'
+import { getUserProfile, setUserProfile } from "../../../state-management/reducers/home-reducer";
 import { getLoggedInUser, login, setLoggedInUser } from "../../../state-management/reducers/logon-reducer";
 
 function* loginHandler(action){
@@ -8,9 +9,11 @@ function* loginHandler(action){
 }
 function* getLoggedInUserHandler(action){
     const { data }= yield call(Api.getLoggedInUser)
-    if(data !== undefined){
-        yield put(setLoggedInUser(data))
-    }
+    yield put(setLoggedInUser(data))
+}
+function* getUserHandler(action){
+    const { data }= yield call(Api.getUser, action.payload)
+    yield put(setUserProfile(data))
 }
 
 export function* loginUserSaga(action){
@@ -18,4 +21,7 @@ export function* loginUserSaga(action){
 }
 export function* getLoggedInUserSaga(action){
     yield takeEvery([getLoggedInUser.type], getLoggedInUserHandler)
+}
+export function* getUserSaga(action){
+    yield takeEvery([getUserProfile.type], getUserHandler)
 }

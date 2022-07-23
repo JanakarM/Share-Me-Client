@@ -1,5 +1,5 @@
 import { call, put, takeEvery } from 'redux-saga/effects'
-import { savePost, setCreatePinStatus, setFeeds, updateFeeds, createPost, updateCategories, setCategories, deletePin, deletePost } from '../../../state-management/reducers/home-reducer'
+import { savePost, setCreatePinStatus, setFeeds, updateFeeds, createPost, updateCategories, setCategories, deletePin, deletePost, getPinDetail, setPinDetail } from '../../../state-management/reducers/home-reducer'
 import * as Api from '../../../api-client'
 
 //handler function starts
@@ -25,6 +25,11 @@ function* deletePostHanlder(action){
     yield put(setFeeds(data))
 }
 
+function* getPostDetilHanlder(action){
+    const { data }= yield call(Api.getPost, action.payload)
+    yield put(setPinDetail(data))
+}
+
 //handler function ends
 
 //watcher functions starts
@@ -43,6 +48,10 @@ export function* createPostSaga(action){
 
 export function* deletePostSaga(action){
     yield takeEvery([deletePost.type], deletePostHanlder)
+}
+
+export function* getPostDetilSaga(action){
+    yield takeEvery([getPinDetail.type], getPostDetilHanlder)
 }
 
 //watcher functions ends
