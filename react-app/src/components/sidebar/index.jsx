@@ -6,8 +6,8 @@ import logo from '../../assets/images/logo.png'
 import { useSelector } from 'react-redux'
 
 const Sidebar= ({ user, closeToggleSidebar })=> {
-    const activeStyles= 'flex gap-3 px-5 items-center font-extrabold border-r-2 border-black transtion-all duration-200 ease-in-out'
-    const inActiveStyles= 'flex gap-3 px-5 text-gray-500 items-center hover:text-black transtion-all duration-200 ease-in-out capitalize'
+    const activeStyles= 'outline-none flex gap-3 px-5 items-center font-extrabold border-r-2 border-black transtion-all duration-200 ease-in-out'
+    const inActiveStyles= 'outline-none flex gap-3 px-5 text-gray-500 items-center hover:text-black transtion-all duration-200 ease-in-out capitalize'
     const handleCloseToggle= ()=> {
         if(closeToggleSidebar) closeToggleSidebar(false)
     }

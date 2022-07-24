@@ -10,6 +10,13 @@ export const getAuthToken = () => {
     })?.split("=")[1]
     return val === "undefined" ? undefined : val
 }
+export const getCsrfToken = () => {
+    const cookie = document.cookie
+    const val = cookie.split("; ").find(val => {
+        return val.indexOf("XSRF-TOKEN=") !== -1
+    })?.split("=")[1]
+    return val === "undefined" ? undefined : val
+}
 export const getUserFromToken = (token) => {
     return jwt_decode(token)
 }

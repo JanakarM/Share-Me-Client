@@ -1,12 +1,22 @@
 import axios from 'axios'
+import * as Util from '../utils'
 
-const getMethod= async (url, config)=> {
-    try {
-        return await axios.get(url, config)
-    } catch (err) {
+const getMethod= (url, config)=> {
+    return axios.get(url, config).catch(err=> {
         return { error_code: err.response.status }
-    }
-} 
+    })
+}
+const deleteMethod= (url, config)=> {
+    return axios.delete(url, config).catch(err=> {
+        return { error_code: err.response.status }
+    })
+}
+const postMethod= (url, data, config)=> {
+    return axios.post(url, data, config).catch(err=> {
+        return { error_code: err.response.status }
+    })
+}
+
 export const getAllPosts= ()=> {
     return getMethod('/feed')
 }
@@ -22,29 +32,21 @@ export const getCategories= ()=> {
     return getMethod('/feed/categories')
 }
 
-export const createPost= async (feed)=> {
-    try {
-        return await axios.post('/feed/add', feed)
-    } catch (err) {
-        return { error_code: err.response.status }
-    }
+export const createPost= (feed)=> {
+    return postMethod('/feed/add', feed)
 }
-export const savePost= async (feedId)=> {
-    try {
-        return await axios.post('/feed/save', {feedId})
-    } catch (err) {
-        return { error_code: err.response.status }
-    }
+export const savePost= (feedId)=> {
+    return postMethod('/feed/save', {feedId})
 }
-export const removeSavedPost= async (feedId)=> {
-    try {
-        return await axios.delete(`/feed/saved/remove?feedId=${feedId}`)
-    } catch (err) {
-        return { error_code: err.response.status }
-    }
+export const removeSavedPost= (feedId)=> {
+    return deleteMethod(`/feed/saved/remove?feedId=${feedId}`, {
+        headers: {
+            "X-XSRF-TOKEN": Util.getCsrfToken()
+        }
+    })
 }
 export const deletePost= (feedId)=> {
-    return axios.delete(`/feed/${feedId}`)
+    return deleteMethod(`/feed/${feedId}`)
 }
 
 export const getLoggedInUser= ()=> {
