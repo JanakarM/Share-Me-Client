@@ -22,7 +22,7 @@ const Feed= ()=> {
         feeds= feeds.filter(feed=> feed.category.id === parseInt(categoryId))
     }
     if(tag === 'saved'){
-        feeds= feeds.filter(feed=> savedFeedIds.includes(feed.id))
+        feeds= feeds.filter(feed=> savedFeedIds?.includes(feed.id))
     }
     if(searchTerm !== ''){
         const searchTermUpperCase= searchTerm.toUpperCase()

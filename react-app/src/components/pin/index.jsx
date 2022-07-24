@@ -86,7 +86,7 @@ const Pin= ({ pin: {id, imageUrl, author, siteUrl, postSaved, savedCount}, saved
                             
                             {/* Delete option should be visible only to author of post */}
                             {
-                                (user.id === author.id) && 
+                                (savedPin || user.id === author.id) && 
                                 <AiTwotoneDelete fontSize={22} className="bg-white rounded-full p-1 cursor-pointer opacity-75 hover:opacity-100" 
                                 onClick={(e)=> {e.stopPropagation(); deletePin()}}
                                 />
