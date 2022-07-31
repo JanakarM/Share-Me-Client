@@ -14,3 +14,4 @@
     - axios - Rest API client to consume web service
 ## Pending
     - Pagination
+    - Custom hooks

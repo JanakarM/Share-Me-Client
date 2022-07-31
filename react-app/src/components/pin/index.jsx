@@ -96,7 +96,6 @@ const Pin= ({ pin: {id, imageUrl, author, siteUrl, postSaved, savedCount}, saved
                 )}
             </div>
             
-            {/* Change email to id */}
             <Link to={`/user-profile/${author.id}`} className='flex items-center gap-2 text-sm'>
                 <img src={`/file/download?fileName=${author.profilePicUrl}`} alt="user-profile" className="rounded-full w-7" />
                 {author.name}
