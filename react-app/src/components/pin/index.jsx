@@ -9,7 +9,7 @@ import { useEffect, useRef, useState } from "react"
 import { downloadImage } from "../../api-client"
 import {Buffer} from 'buffer';
 
-const Pin= ({ pin: {id, imageUrl, author, siteUrl, postSaved, savedCount}, savedPin})=> {
+const Pin= ({ pin: {id, imageUrl, author, siteUrl, postSaved, savedCount}, savedPin, componentRef})=> {
     const navigate= useNavigate()
     const dispatch= useDispatch()
     const user= useSelector(state=> state.logon.user)
@@ -42,7 +42,7 @@ const Pin= ({ pin: {id, imageUrl, author, siteUrl, postSaved, savedCount}, saved
     }
     
     return (
-        <div className="m-1 mb-2">
+        <div ref={componentRef} className="m-1 mb-2">
             <div className="relative cursor-zoom-in" 
                 onMouseEnter={(e)=> setPostHovered(true)} 
                 onMouseLeave={(e)=> setPostHovered(false)}

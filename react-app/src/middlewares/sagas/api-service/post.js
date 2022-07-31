@@ -2,11 +2,12 @@ import { call, put, takeEvery } from 'redux-saga/effects'
 import { savePost, setCreatePinStatus, setFeeds, updateFeeds, createPost, updateCategories, setCategories, deletePin, deletePost, getPinDetail, setPinDetail, unSavePost } from '../../../state-management/reducers/home-reducer'
 import * as Api from '../../../api-client'
 import { setSavedFeedIds } from '../../../state-management/reducers/logon-reducer'
+import { useSelector } from 'react-redux'
 
 //handler function starts
 
 function* fetchPostsHandler(action){
-    let { data }= yield call(Api.getAllPosts)
+    let { data }= yield call(Api.getAllPosts, action.payload)
     yield put(setFeeds(data));
     ({ data } = yield call(Api.getSavedPostIds))
     yield put(setSavedFeedIds(data))
@@ -24,7 +25,7 @@ function* createPostHanlder(action){
 
 function* deletePostHanlder(action){
     yield call(Api.deletePost, action.payload)
-    const { data }= yield call(Api.getAllPosts)
+    const { data }= yield call(Api.getAllPosts, action.payload)
     yield put(setFeeds(data))
 }
 

@@ -14,7 +14,9 @@ const slice = createSlice({
         pinDetailLoading: false,
         pinDetail: undefined,
         userProfile: undefined,
-        feedsLoading: false
+        feedsLoading: false,
+        pageNumber: 1,
+        countPerPage: 5
     },
     reducers: {
         setToggleSidebar: (state, { payload }) => {
@@ -24,7 +26,7 @@ const slice = createSlice({
             return {...state, searchTerm: payload}
         },
         setFeeds: (state, { payload }) => {
-            return {...state, feeds: payload, feedsLoading: false}
+            return {...state, feeds: [...new Set([...state.feeds, ...payload])], feedsLoading: false}
         },
         savePost: (state, { payload }) => {
             
@@ -59,6 +61,9 @@ const slice = createSlice({
         },
         setUserProfile(state, { payload }){
             return {...state, userProfile: payload, userProfileLoading: false}
+        },
+        nextPage(state, { payload }){
+            return {...state, pageNumber: state.pageNumber+1}
         }
     }
 });
@@ -67,6 +72,6 @@ export const
     setToggleSidebar, setSearchTerm, setFeeds, savePost,
     unSavePost, createPost, updateFeeds, setCreatePinStatus,
     updateCategories, setCategories, deletePost, getPinDetail, 
-    setPinDetail, getUserProfile, setUserProfile
+    setPinDetail, getUserProfile, setUserProfile, nextPage
 } = slice.actions;
 export default slice.reducer;

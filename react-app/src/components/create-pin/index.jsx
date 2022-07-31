@@ -1,11 +1,11 @@
-import React, { useState, useRef } from "react";
-import { Navigate, Route, Routes, useNavigate } from 'react-router-dom'
+import React, { useState } from "react";
+import { useNavigate } from 'react-router-dom'
 import {AiOutlineCloudUpload} from 'react-icons/ai'
 import { MdDelete } from 'react-icons/md'
 import { useDispatch, useSelector } from 'react-redux'
 import { Spinner } from '../../components'
 import { useEffect } from "react";
-import { updateFeeds, createPost, setCreatePinStatus } from "../../state-management/reducers/home-reducer";
+import { createPost, setCreatePinStatus } from "../../state-management/reducers/home-reducer";
 
 const CreatePin= ()=> {
     const user= useSelector(state=> state.logon.user)

@@ -3,7 +3,6 @@ import { useSelector } from "react-redux"
 import { useParams } from "react-router"
 import { MasonryLayout, Spinner } from ".."
 import { TbMoodEmpty } from 'react-icons/tb'
-import { useState } from "react"
 import { useDispatch } from "react-redux";
 import { updateFeeds } from "../../state-management/reducers/home-reducer";
 
@@ -12,11 +11,17 @@ const Feed= ()=> {
     const loading= useSelector(state=> state.home.feedLoading)
     const searchTerm= useSelector(state=> state.home.searchTerm)
     const savedFeedIds= useSelector(state=> state.logon.savedFeedIds)
+    const { pageNumber, countPerPage }= useSelector(state=> state.home)
+    const createPinStatus= useSelector(state=> state.home.createPinStatus)
     const dispatch= useDispatch()
     useEffect(()=> {
-        dispatch(updateFeeds())
-    }, [])
-    
+        const pageInfo= {
+            pageNumber: pageNumber, 
+            countPerPage: countPerPage
+        }
+        dispatch(updateFeeds(pageInfo))
+    }, [createPinStatus])
+
     let feeds= useSelector(state=> state.home.feeds)
     if(categoryId !== undefined){
         feeds= feeds.filter(feed=> feed.category.id === parseInt(categoryId))

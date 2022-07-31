@@ -17,8 +17,8 @@ const postMethod= (url, data, config)=> {
     })
 }
 
-export const getAllPosts= ()=> {
-    return getMethod('/feed')
+export const getAllPosts= ({ pageNumber, countPerPage })=> {
+    return getMethod(`/feed?pageNumber=${pageNumber}&countPerPage=${countPerPage}`)
 }
 export const getSavedPostIds= ()=> {
     return getMethod('/feed/saved')
