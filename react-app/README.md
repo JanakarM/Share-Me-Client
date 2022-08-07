@@ -5,6 +5,7 @@
     - Save post
     - View post details
     - Google authentication
+    - Pagination (using IntersectionObserver Dcoument API)
 ## Technologies and concepts used
     - Google oauth integration
     - Reduc toolkit
@@ -12,6 +13,5 @@
     - Functional components
         - component hooks
     - axios - Rest API client to consume web service
-## Pending
-    - Pagination
-    - Custom hooks
+## Application Screenshots
+    - Refer .\application_screenshots
