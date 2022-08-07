@@ -14,4 +14,4 @@
         - component hooks
     - axios - Rest API client to consume web service
 ## Application Screenshots
-    - Refer .\application_screenshots
+    - Refer .\application screenshots
