@@ -20,3 +20,20 @@ export const getCsrfToken = () => {
 export const getUserFromToken = (token) => {
     return jwt_decode(token)
 }
+export const checkObjectExistenceByKey= (arr, obj, key)=> {
+
+}
+export const distinctUnionOfObjects= (arr_of_objects_1, arr_of_objects_2)=> {
+    const result_arr= []
+    arr_of_objects_1.forEach(e=> {
+        if(result_arr.filter(o=> o.id == e.id).length == 0){
+            result_arr.push(e)
+        }
+    })
+    arr_of_objects_2.forEach(e=> {
+        if(result_arr.filter(o=> o.id == e.id).length == 0){
+            result_arr.push(e)
+        }
+    })
+    return result_arr;
+}

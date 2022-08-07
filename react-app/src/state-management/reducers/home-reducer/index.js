@@ -1,4 +1,5 @@
 import {createSlice} from '@reduxjs/toolkit';
+import { distinctUnionOfObjects } from '../../../utils';
 
 const slice = createSlice({
     name: 'home',
@@ -26,7 +27,7 @@ const slice = createSlice({
             return {...state, searchTerm: payload}
         },
         setFeeds: (state, { payload }) => {
-            return {...state, feeds: [...new Set([...state.feeds, ...payload])], feedsLoading: false}
+            return {...state, feeds: distinctUnionOfObjects(state.feeds, payload), feedsLoading: false}
         },
         savePost: (state, { payload }) => {
             

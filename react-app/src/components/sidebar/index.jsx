@@ -27,7 +27,7 @@ const Sidebar= ({ user, closeToggleSidebar })=> {
                     Saved
                 </NavLink>
                 <h6 className='mt-2 px-5 text-base 2xl:text-xl'>Discover Categories</h6>
-                {categories.slice(0, categories.length-1).map(({id, categoryName})=> (
+                {categories.map(({id, categoryName})=> (
                     <NavLink to={`/category/${id}`} key={id} className={({ isActive })=> isActive? activeStyles: inActiveStyles} onClick={(e)=> handleCloseToggle()}>
                         {categoryName}
                     </NavLink>

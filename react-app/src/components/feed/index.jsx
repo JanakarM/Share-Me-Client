@@ -12,7 +12,6 @@ const Feed= ()=> {
     const searchTerm= useSelector(state=> state.home.searchTerm)
     const savedFeedIds= useSelector(state=> state.logon.savedFeedIds)
     const { pageNumber, countPerPage }= useSelector(state=> state.home)
-    const createPinStatus= useSelector(state=> state.home.createPinStatus)
     const dispatch= useDispatch()
     useEffect(()=> {
         const pageInfo= {
@@ -20,7 +19,7 @@ const Feed= ()=> {
             countPerPage: countPerPage
         }
         dispatch(updateFeeds(pageInfo))
-    }, [createPinStatus])
+    }, [pageNumber])
 
     let feeds= useSelector(state=> state.home.feeds)
     if(categoryId !== undefined){
