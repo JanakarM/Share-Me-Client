@@ -3,7 +3,7 @@ import { HiMenu } from 'react-icons/hi'
 import {AiFillCloseCircle} from 'react-icons/ai'
 import { Route, Routes, Link} from 'react-router-dom'
 import logo from '../../assets/images/logo.png'
-import { Sidebar, UserProfile, Pins, CreatePin, PinDetail } from '../../components'
+import { Sidebar, UserProfile, Pins, CreatePin, PinDetail } from '..'
 import { useDispatch, useSelector } from 'react-redux'
 import { setToggleSidebar, updateCategories } from '../../state-management/reducers/home-reducer'
 

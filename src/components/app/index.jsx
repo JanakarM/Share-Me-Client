@@ -6,7 +6,7 @@ import ProtectedRoute from "../protected-route";
 import { useDispatch, useSelector } from "react-redux";
 import { getLoggedInUser, login } from "../../state-management/reducers/logon-reducer";
 import Home from "../home";
-import { Spinner } from '../../components'
+import { Spinner } from '..'
 
 const App = ()=>{
     const user = useSelector(state => state.logon.user)

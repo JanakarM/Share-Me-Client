@@ -1,5 +1,5 @@
-import * as posts from '../api-service/post'
-import * as users from '../api-service/user'
+import * as posts from './post'
+import * as users from './user'
 import { all, fork } from 'redux-saga/effects'
 
 export default function* rootSaga(action){

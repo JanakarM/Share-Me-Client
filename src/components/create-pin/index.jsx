@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom'
 import {AiOutlineCloudUpload} from 'react-icons/ai'
 import { MdDelete } from 'react-icons/md'
 import { useDispatch, useSelector } from 'react-redux'
-import { Spinner } from '../../components'
+import { Spinner } from '..'
 import { useEffect } from "react";
 import { createPost, setCreatePinStatus } from "../../state-management/reducers/home-reducer";
 

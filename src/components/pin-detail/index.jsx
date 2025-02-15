@@ -3,7 +3,7 @@ import { useEffect } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import { useParams, Link } from "react-router-dom"
 import { getPinDetail } from "../../state-management/reducers/home-reducer"
-import { Spinner } from "../../components"
+import { Spinner } from ".."
 import { BiLinkExternal, BiLink } from 'react-icons/bi'
 
 const PinDetail= ()=> {

@@ -1,5 +1,5 @@
 import Masonry from 'react-masonry-css'
-import { Pin } from '../'
+import { Pin } from '..'
 import React, { useRef, useCallback } from 'react'
 import { nextPage } from '../../state-management/reducers/home-reducer'
 import { useDispatch, useSelector } from 'react-redux'

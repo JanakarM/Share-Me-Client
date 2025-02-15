@@ -1,7 +1,7 @@
 import React from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { Route, Routes } from 'react-router-dom'
-import { Navbar, Feed } from '../../components'
+import { Navbar, Feed } from '..'
 import { setSearchTerm } from '../../state-management/reducers/home-reducer'
 
 const Pins= ({ user })=> {
